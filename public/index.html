@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto-Correcting C Compiler</title>
+    <meta name="description" content="A tool that identifies and corrects minor C syntax errors on the fly.">
+    <!-- Google Fonts: Inter for UI, Fira Code for code -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Background Animated Orbs -->
+    <div class="background-globes">
+        <div class="globe globe-1"></div>
+        <div class="globe globe-2"></div>
+        <div class="globe globe-3"></div>
+    </div>
+    
+    <div class="app-container">
+        <header>
+            <h1><span class="gradient-text">Auto-Correcting</span> C Compiler</h1>
+            <p>A smart Lex-powered tool that automatically patches missing semicolons and uninitialized variables.</p>
+        </header>
+
+        <div class="main-content">
+            <!-- Left Side: Input -->
+            <div class="panel editor-panel glass">
+                <div class="panel-header">
+                    <h2>Input Code (C)</h2>
+                    <button class="action-btn glow-effect" id="compile-btn">
+                        <span class="btn-text">Compile & Fix ➔</span>
+                        <div class="loader hidden"></div>
+                    </button>
+                </div>
+                <textarea id="code-input" spellcheck="false" class="fira-code">
+#include <stdio.h>
+
+int main() {
+    int counter;
+    float result = 50.5
+    int b = 10
+    
+    return 0
+}
+</textarea>
+            </div>
+
+            <!-- Right Side: Outputs -->
+            <div class="right-pane">
+                <div class="panel glass steps-panel">
+                    <div class="panel-header"><h2>Compiler Analysis</h2></div>
+                    <div class="steps-container fira-code" id="steps-output">
+                        <div class="placeholder">Waiting for code to compile...</div>
+                    </div>
+                </div>
+
+                <div class="panel glass output-panel">
+                    <div class="panel-header"><h2>Corrected Code</h2></div>
+                    <pre><code id="code-output" class="fira-code"></code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,4 @@
+[Line 4] Uninitialized integer 'counter' found. Auto-initialized to 0.
+[Line 5] Missing semicolon at the end of declaration. Added ';'.
+[Line 6] Missing semicolon at the end of declaration. Added ';'.
+[Line 8] Missing semicolon in return statement. Added ';'.
