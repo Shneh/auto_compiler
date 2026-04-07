@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const ptreeOutput = document.getElementById('ptree-output');
     const atreeOutput = document.getElementById('atree-output');
     const macOutput = document.getElementById('mac-output');
+    const tokensOutput = document.getElementById('tokens-output');
 
     // Tab Switching Logic
     const tabBtns = document.querySelectorAll('.tab-btn');
@@ -32,6 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Reset Logic
         stepsOutput.innerHTML = '';
         codeOutput.textContent = '';
+        tokensOutput.textContent = '';
         ptreeOutput.textContent = '';
         atreeOutput.textContent = '';
         macOutput.textContent = '';
@@ -75,6 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Show outputs
             codeOutput.textContent = data.correctedCode || rawCode;
+            tokensOutput.textContent = data.tokens ? data.tokens.map(t => '[' + t.type + ': ' + t.value.replace(/\n/g, '\\n') + ']').join('  ') : "No token stream generated.";
             ptreeOutput.textContent = data.parseTree || "No parse tree generated.";
             atreeOutput.textContent = data.annotatedParseTree || "No semantic annotations generated.";
             macOutput.textContent = data.threeAC || "No 3AC generated.";

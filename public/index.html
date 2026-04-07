@@ -54,6 +54,7 @@ int main() {
             <div class="right-pane panel glass output-panel">
                 <div class="panel-header tab-bar">
                     <button class="tab-btn active" data-tab="steps-output">Analysis</button>
+                    <button class="tab-btn" data-tab="tab-tokens">Tokens</button>
                     <button class="tab-btn" data-tab="tab-code">Code</button>
                     <button class="tab-btn" data-tab="tab-ptree">Parse Tree</button>
                     <button class="tab-btn" data-tab="tab-atree">Annotated PT</button>
@@ -65,6 +66,10 @@ int main() {
                         <div class="placeholder">Waiting for code to compile...</div>
                     </div>
                     
+                    <div id="tab-tokens" class="tab-pane">
+                        <pre><code id="tokens-output" class="fira-code"></code></pre>
+                    </div>
+
                     <div id="tab-code" class="tab-pane">
                         <pre><code id="code-output" class="fira-code"></code></pre>
                     </div>
