@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Auto-Correcting C Compiler</title>
     <meta name="description" content="A tool that identifies and corrects minor C syntax errors on the fly.">
     <!-- Google Fonts: Inter for UI, Fira Code for code -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Fira+Code:wght@400;600&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <!-- Background Animated Orbs -->
     <div class="background-globes">
@@ -16,10 +20,10 @@
         <div class="globe globe-2"></div>
         <div class="globe globe-3"></div>
     </div>
-    
+
     <div class="app-container">
         <header>
-            <h1><span class="gradient-text">Auto-Correcting</span> C Compiler</h1>
+            <h1><span></span> Auto-Correcting C Compiler</h1>
             <p>A smart Lex-powered tool that automatically patches missing semicolons and uninitialized variables.</p>
         </header>
 
@@ -47,21 +51,40 @@ int main() {
             </div>
 
             <!-- Right Side: Outputs -->
-            <div class="right-pane">
-                <div class="panel glass steps-panel">
-                    <div class="panel-header"><h2>Compiler Analysis</h2></div>
-                    <div class="steps-container fira-code" id="steps-output">
+            <div class="right-pane panel glass output-panel">
+                <div class="panel-header tab-bar">
+                    <button class="tab-btn active" data-tab="steps-output">Analysis</button>
+                    <button class="tab-btn" data-tab="tab-code">Code</button>
+                    <button class="tab-btn" data-tab="tab-ptree">Parse Tree</button>
+                    <button class="tab-btn" data-tab="tab-atree">Annotated PT</button>
+                    <button class="tab-btn" data-tab="tab-3ac">3AC</button>
+                </div>
+                
+                <div class="tab-content-container">
+                    <div id="steps-output" class="tab-pane active steps-container fira-code">
                         <div class="placeholder">Waiting for code to compile...</div>
                     </div>
-                </div>
+                    
+                    <div id="tab-code" class="tab-pane">
+                        <pre><code id="code-output" class="fira-code"></code></pre>
+                    </div>
 
-                <div class="panel glass output-panel">
-                    <div class="panel-header"><h2>Corrected Code</h2></div>
-                    <pre><code id="code-output" class="fira-code"></code></pre>
+                    <div id="tab-ptree" class="tab-pane">
+                        <pre><code id="ptree-output" class="fira-code"></code></pre>
+                    </div>
+
+                    <div id="tab-atree" class="tab-pane">
+                        <pre><code id="atree-output" class="fira-code"></code></pre>
+                    </div>
+
+                    <div id="tab-3ac" class="tab-pane">
+                        <pre><code id="mac-output" class="fira-code"></code></pre>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     <script src="script.js"></script>
 </body>
+
 </html>

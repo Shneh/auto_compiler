@@ -1,10 +1,10 @@
-#include <stdio.h>
+#inclue <stdio.h>
 
-int main() {
+it main() {
     int counter;
     float result = 50.5
-    int b = 
+    int b = 10
     
-    retur 0
+    return 0
 }
 

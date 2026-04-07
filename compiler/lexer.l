@@ -13,6 +13,22 @@ void log_msg(const char *msg) {
 
 %%
 
+  /* 0. Preprocessor Directives */
+^[ \t]*"#"([ \t]*)[a-zA-Z]+ {
+    char directive[100];
+    char *p = strchr(yytext, '#');
+    p++;
+    while(*p == ' ' || *p == '\t') p++;
+    sscanf(p, "%[a-zA-Z]", directive);
+    
+    if (strcmp(directive, "include") != 0 && strcmp(directive, "define") != 0 && strcmp(directive, "pragma") != 0 && strcmp(directive, "ifndef") != 0 && strcmp(directive, "endif") != 0 && strcmp(directive, "ifdef") != 0 && strcmp(directive, "if") != 0 && strcmp(directive, "else") != 0 && strcmp(directive, "elif") != 0 && strcmp(directive, "undef") != 0 && strcmp(directive, "error") != 0 && strcmp(directive, "warning") != 0) {
+        char msg[256];
+        sprintf(msg, "Error: Invalid preprocessor directive '#%s'.", directive);
+        log_msg(msg);
+    }
+    printf("%s", yytext);
+}
+
   /* 1. Handling uninitialized declared variables like: int x; */
 "int"[ \t]+[a-zA-Z_][a-zA-Z0-9_]*[ \t]*";" {
     char type[10];
@@ -136,7 +152,19 @@ void log_msg(const char *msg) {
     line_num++;
 }
 
+  /* 5. Valid C Tokens */
+[a-zA-Z_][a-zA-Z0-9_]*        { printf("%s", yytext); }
+[0-9]+(\.[0-9]+)?             { printf("%s", yytext); }
+\"([^\\\"]|\\.)*\"            { printf("%s", yytext); }
+\'([^\\\']|\\.)*\'            { printf("%s", yytext); }
+[ \t]+                        { printf("%s", yytext); }
+[+\-*/%=!<>|&^~()\[\]{};:,\.] { printf("%s", yytext); }
+
+  /* 6. Lexical Error Fallback */
 . {
+    char msg[256];
+    sprintf(msg, "Lexical Error: Unrecognized token '%s'", yytext);
+    log_msg(msg);
     printf("%s", yytext);
 }
 

@@ -1,0 +1,4 @@
+test.c:1:2: error: invalid preprocessing directive
+    1 | #incude <stdio.>
+      |  ^
+1 error generated.

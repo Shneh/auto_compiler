@@ -5,12 +5,36 @@ document.addEventListener('DOMContentLoaded', () => {
     const codeOutput = document.getElementById('code-output');
     const outputPanel = document.querySelector('.output-panel');
 
+    const ptreeOutput = document.getElementById('ptree-output');
+    const atreeOutput = document.getElementById('atree-output');
+    const macOutput = document.getElementById('mac-output');
+
+    // Tab Switching Logic
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabPanes = document.querySelectorAll('.tab-pane');
+
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Remove active from all
+            tabBtns.forEach(b => b.classList.remove('active'));
+            tabPanes.forEach(p => p.classList.remove('active'));
+            
+            // Add active to current
+            btn.classList.add('active');
+            const targetId = btn.getAttribute('data-tab');
+            document.getElementById(targetId).classList.add('active');
+        });
+    });
+
     compileBtn.addEventListener('click', async () => {
         const rawCode = codeInput.value;
         
         // Reset Logic
         stepsOutput.innerHTML = '';
         codeOutput.textContent = '';
+        ptreeOutput.textContent = '';
+        atreeOutput.textContent = '';
+        macOutput.textContent = '';
         outputPanel.classList.remove('output-success');
         
         // Button Loading State
@@ -37,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Render Steps Sequentially
             if (data.steps && data.steps.length > 0) {
                 for (let i = 0; i < data.steps.length; i++) {
-                    await new Promise(r => setTimeout(r, 400)); // Delay between steps
+                    await new Promise(r => setTimeout(r, 200)); // Adjusted delay to be faster
                     const stepDiv = document.createElement('div');
                     stepDiv.className = 'step-item';
                     stepDiv.textContent = data.steps[i];
@@ -49,9 +73,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 stepsOutput.innerHTML = '<div class="placeholder glow-text" style="color: var(--success)">✓ No errors found. Code is clean!</div>';
             }
 
-            // Finally, show the corrected code
-            await new Promise(r => setTimeout(r, 400));
+            // Show outputs
             codeOutput.textContent = data.correctedCode || rawCode;
+            ptreeOutput.textContent = data.parseTree || "No parse tree generated.";
+            atreeOutput.textContent = data.annotatedParseTree || "No semantic annotations generated.";
+            macOutput.textContent = data.threeAC || "No 3AC generated.";
+            
             outputPanel.classList.add('output-success');
             
         } catch (err) {
